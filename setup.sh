@@ -6,7 +6,6 @@ if [ -z "${PY_VER}" ]; then
   exit
 fi
 
-
 install_dependencies() {
   sudo yum -y install git
   sudo yum -y groupinstall "Development Tools"
@@ -62,7 +61,6 @@ pip_install() {
   pip install configparser
 }
 
-
 install_dependencies
 pyenv_install
 python_install $PY_VER
@@ -71,7 +69,7 @@ pip_install
 
 echo ''
 echo '###############################################'
-echo '# You have to do following after installation'
+echo '# You have to do followings after installation'
 echo '###############################################'
 echo 'source ~/.bash_profile'
 echo ''
