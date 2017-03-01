@@ -2,6 +2,10 @@
 PY_VER=$1
 VENV_NAME=$2
 
+if [ ! -e '~/.bash_profile' ]; then
+  source ~/.bash_profile
+fi
+
 install_dependencies() {
   sudo yum -y install git
   sudo yum -y groupinstall "Development Tools"
@@ -31,7 +35,7 @@ python_install() {
   PY_VER=$1
   if [ -z "${PY_VER}" ]; then
     echo '[ERROR] python_install() : specify version of python.'
-    exit
+    exit 1
   fi
 
   if [ `pyenv versions | grep -w "${PY_VER}" > /dev/null 2>&1; echo $?` == 0 ]; then
@@ -46,11 +50,11 @@ ansible_install() {
   VENV_NAME=$2
   if [ -z "${PY_VER}" ]; then
     echo '[ERROR] ansible_install() : specify version of python.'
-    exit
+    exit 1
   fi
   if [ -z "${VENV_NAME}" ]; then
     echo '[ERROR] ansible_install() : specify VENV_NAME for virtualenv.'
-    exit
+    exit 1
   fi
 
   pyenv virtualenv ${PY_VER} ${VENV_NAME}
