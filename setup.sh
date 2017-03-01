@@ -1,15 +1,11 @@
 #!/bin/bash
 PY_VER=$1
-
-if [ -z "${PY_VER}" ]; then
-  echo '[ERROR] specify version of python as first argument.'
-  exit
-fi
+VENV_NAME=$2
 
 install_dependencies() {
   sudo yum -y install git
   sudo yum -y groupinstall "Development Tools"
-  sudo yum -y install readline-devel zlib-devel bzip2-devel sqlite-devel openssl-devel libXext.x86_64 libSM.x86_64 libXrender.x86_64
+  sudo yum -y install readline-devel zlib-devel bzip2-devel sqlite-devel openssl-devel libXext.x86_64 libSM.x86_64 libXrender.x86_64 gcc libffi-devel python-devel
 }
 
 pyenv_install() {
@@ -43,11 +39,22 @@ python_install() {
   else
     pyenv install ${PY_VER}
   fi
-
-  pyenv global ${PY_VER}
 }
 
 ansible_install() {
+  PY_VER=$1
+  VENV_NAME=$2
+  if [ -z "${PY_VER}" ]; then
+    echo '[ERROR] ansible_install() : specify version of python.'
+    exit
+  fi
+  if [ -z "${VENV_NAME}" ]; then
+    echo '[ERROR] ansible_install() : specify VENV_NAME for virtualenv.'
+    exit
+  fi
+
+  pyenv virtualenv ${PY_VER} ${VENV_NAME}
+  pyenv local ${PY_VER}/envs/${VENV_NAME}
   pip install --upgrade pip
   pip install ansible
 }
@@ -64,7 +71,7 @@ pip_install() {
 install_dependencies
 pyenv_install
 python_install $PY_VER
-ansible_install
+ansible_install $PY_VER $VENV_NAME
 pip_install
 
 echo ''
@@ -72,6 +79,7 @@ echo '###############################################'
 echo '# You have to do followings after installation'
 echo '###############################################'
 echo 'source ~/.bash_profile'
+echo 'mv ~/installer-ansible-for-aws/.python-version {working directory}/'
 echo ''
 echo '# If you use modules of aws on ansible, do followings'
 echo 'aws configure'

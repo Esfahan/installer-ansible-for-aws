@@ -13,5 +13,5 @@ Installer of ansible to user modules of aws
 ## Usage
 
 ```
-$ /bin/sh setup.sh
+$ /bin/sh setup.sh {version of python} {name of virtualenv}
 ```
