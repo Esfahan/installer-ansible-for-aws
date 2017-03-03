@@ -40,6 +40,7 @@ python_install() {
 
   if [ `pyenv versions | grep -w "${PY_VER}" > /dev/null 2>&1; echo $?` == 0 ]; then
     echo "[INFO] python_install() : python ${PY_VER} is already installed.(skipping...)"
+    return
   else
     pyenv install ${PY_VER}
   fi
