@@ -1,9 +1,14 @@
 # installer-ansible-for-aws
-Installer of ansible to user modules of aws
+Installer of ansible2.3 with python2 to user modules of aws
 
+## Requirements
 - pyenv
+- python 2.7.13
+- ansible2.3
+
+### pip
+- ansible
 - python
-- ansible as pip
 - boto
 - boto3
 - botocore
@@ -13,8 +18,5 @@ Installer of ansible to user modules of aws
 ## Usage
 
 ```
-$ /bin/sh setup.sh {version of python} {name of virtualenv}
+$ /bin/sh setup.sh {name of virtualenv}
 ```
-
-## ansible-2.3
-There is binary files in ansible2.3 directory.
