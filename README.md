@@ -15,3 +15,6 @@ Installer of ansible to user modules of aws
 ```
 $ /bin/sh setup.sh {version of python} {name of virtualenv}
 ```
+
+## ansible-2.3
+There is binary files in ansible2.3 directory.
