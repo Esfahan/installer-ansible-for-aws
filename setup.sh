@@ -1,6 +1,6 @@
 #!/bin/bash
-PY_VER=$1
-VENV_NAME=$2
+PY_VER=2.7.13
+VENV_NAME=$1
 
 if [ ! -e '~/.bash_profile' ]; then
   source ~/.bash_profile
@@ -46,7 +46,7 @@ python_install() {
   fi
 }
 
-ansible_install() {
+venv_install() {
   PY_VER=$1
   VENV_NAME=$2
   if [ -z "${PY_VER}" ]; then
@@ -61,7 +61,19 @@ ansible_install() {
   pyenv virtualenv ${PY_VER} ${VENV_NAME}
   pyenv local ${PY_VER}/envs/${VENV_NAME}
   pip install --upgrade pip
-  pip install ansible
+}
+
+ansible2_3_install() {
+  # from https://github.com/ansible/ansible.git
+  COMMENT_ANSIBLE='# path for ansible2.3'
+  cat ~/.bash_profile | grep -w "${COMMENT_ANSIBLE}" > /dev/null 2>&1
+  if [ $? = 1 ]; then
+    echo ' ' >> ~/.bash_profile
+    echo "${COMMENT_ANSIBLE}" >> ~/.bash_profile
+    printf 'export PATH="%q/ansible-2.3/bin:$PATH"' "$(pwd)"  >> ~/.bash_profile
+  else
+    echo "[INFO] ansible2-3_install() : ansible2.3 is already installed.(skipping...)"
+  fi
 }
 
 # dependencies for aws module on ansible
@@ -76,7 +88,8 @@ pip_install() {
 install_dependencies
 pyenv_install
 python_install $PY_VER
-ansible_install $PY_VER $VENV_NAME
+venv_install $PY_VER $VENV_NAME
+ansible2_3_install
 pip_install
 
 echo ''
