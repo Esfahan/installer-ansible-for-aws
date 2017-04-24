@@ -78,6 +78,7 @@ ansible2_3_install() {
 
 # dependencies for aws module on ansible
 pip_install() {
+  pip install ansible
   pip install awscli
   pip install boto
   pip install boto3

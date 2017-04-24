@@ -7,6 +7,7 @@ Installer of ansible2.3 with python2 to user modules of aws
 - ansible2.3
 
 ### pip
+- ansible
 - python
 - boto
 - boto3
