@@ -1,5 +1,5 @@
 # installer-ansible-for-aws
-Installer of ansible2.3 with python2 to user modules of aws
+Installer of ansible2.3 with python2
 
 ## Requirements
 - pyenv
@@ -8,12 +8,11 @@ Installer of ansible2.3 with python2 to user modules of aws
 
 ### pip
 - ansible
-- python
+- awscli
 - boto
 - boto3
 - botocore
 - configparser
-
 
 ## Usage
 
