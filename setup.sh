@@ -63,11 +63,11 @@ venv_install() {
   pip install --upgrade pip
 }
 
-ansible2_3_install() {
+ansible_latest_install() {
   if [ `ls /usr/local/bin/ansible > /dev/null 2>&1; echo $?` == 0 ]; then
-    echo "[INFO] ansible2-3_install() : ansible2.3 is already installed.(skipping...)"
+    echo "[INFO] ansible_latest_install() : ansible-latest is already installed.(skipping...)"
   else
-    sudo cp -rp ansible-2.3/bin/* /usr/local/bin
+    sudo cp -rp ansible-latest/bin/* /usr/local/bin
   fi
 }
 
@@ -85,7 +85,7 @@ install_dependencies
 pyenv_install
 python_install $PY_VER
 venv_install $PY_VER $VENV_NAME
-ansible2_3_install
+ansible_latest_install
 pip_install
 
 echo ''
