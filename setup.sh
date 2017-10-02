@@ -64,15 +64,10 @@ venv_install() {
 }
 
 ansible2_3_install() {
-  # from https://github.com/ansible/ansible.git
-  COMMENT_ANSIBLE='# path for ansible2.3'
-  cat ~/.bash_profile | grep -w "${COMMENT_ANSIBLE}" > /dev/null 2>&1
-  if [ $? = 1 ]; then
-    echo ' ' >> ~/.bash_profile
-    echo "${COMMENT_ANSIBLE}" >> ~/.bash_profile
-    printf 'export PATH="%q/ansible-2.3/bin:$PATH"' "$(pwd)"  >> ~/.bash_profile
-  else
+  if [ `ls /usr/local/bin/ansible > /dev/null 2>&1; echo $?` == 0 ]; then
     echo "[INFO] ansible2-3_install() : ansible2.3 is already installed.(skipping...)"
+  else
+    sudo cp -rp ansible-2.3/bin/* /usr/local/bin
   fi
 }
 
