@@ -4,7 +4,7 @@ Installer of ansible2.3 with python2
 ## Requirements
 - pyenv
 - python 2.7.13
-- ansible2.3
+- ansible2.4.0.0
 
 ### pip
 - ansible
